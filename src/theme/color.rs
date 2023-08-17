@@ -192,7 +192,11 @@ pub struct Date {
     #[serde(deserialize_with = "deserialize_color")]
     pub hour_old: Color,
     #[serde(deserialize_with = "deserialize_color")]
+    pub hours_old: Color,
+    #[serde(deserialize_with = "deserialize_color")]
     pub day_old: Color,
+    #[serde(deserialize_with = "deserialize_color")]
+    pub days_old: Color,
     #[serde(deserialize_with = "deserialize_color")]
     pub older: Color,
 }
@@ -319,8 +323,10 @@ impl Default for Symlink {
 impl Default for Date {
     fn default() -> Self {
         Date {
-            hour_old: Color::AnsiValue(40), // Green3
-            day_old: Color::AnsiValue(42),  // SpringGreen2
+            hours_old: Color::AnsiValue(208), // Orange
+            hour_old: Color::AnsiValue(196), // Red
+            days_old: Color::AnsiValue(244),  // SpringGreen2
+            day_old: Color::AnsiValue(240),  // SpringGreen2
             older: Color::AnsiValue(36),    // DarkCyan
         }
     }
@@ -409,9 +415,11 @@ permission:
   exec-sticky: 5
   no-access: 245
 date:
-  hour-old: 40
-  day-old: 42
-  older: 36
+  hours-old: 208
+  hour-old: 196
+  days-old: 244
+  day-old: 240
+  older: 238
 size:
   none: 245
   small: 229

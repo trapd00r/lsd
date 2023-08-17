@@ -35,8 +35,10 @@ impl Date {
     pub fn render(&self, colors: &Colors, flags: &Flags) -> ColoredString {
         let now = Local::now();
         let elem = match self {
-            &Date::Date(modified) if modified > now - Duration::hours(1) => Elem::HourOld,
+            &Date::Date(modified) if modified > now - Duration::hours(2) => Elem::HourOld,
+            &Date::Date(modified) if modified > now - Duration::hours(6) => Elem::HoursOld,
             &Date::Date(modified) if modified > now - Duration::days(1) => Elem::DayOld,
+            &Date::Date(modified) if modified > now - Duration::days(2) => Elem::DaysOld,
             &Date::Date(_) | Date::Invalid => Elem::Older,
         };
         colors.colorize(self.date_string(flags), &elem)
@@ -54,7 +56,7 @@ impl Date {
                     // 365.2425 * 24 * 60 * 60 = 31556952 seconds per year
                     // 15778476 seconds are 6 months
                     if *val > Local::now() - Duration::seconds(15_778_476) {
-                        val.format("%m-%d %R").to_string()
+                        val.format("%m-%d").to_string()
                     } else {
                         val.format("%F").to_string()
                     }

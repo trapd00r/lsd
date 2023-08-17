@@ -40,7 +40,9 @@ pub enum Elem {
 
     /// Last Time Modified
     DayOld,
+    DaysOld,
     HourOld,
+    HoursOld,
     Older,
 
     /// User / Group Name
@@ -113,7 +115,9 @@ impl Elem {
             Elem::Context => theme.permission.context,
 
             Elem::DayOld => theme.date.day_old,
+            Elem::DaysOld => theme.date.day_old,
             Elem::HourOld => theme.date.hour_old,
+            Elem::HoursOld => theme.date.hours_old,
             Elem::Older => theme.date.older,
 
             Elem::User => theme.user,
@@ -422,6 +426,7 @@ mod elem {
                 special: Color::AnsiValue(44),      // DarkTurquoise
             },
             date: color::Date {
+                hours_old: Color::AnsiValue(220), // Green3
                 hour_old: Color::AnsiValue(40), // Green3
                 day_old: Color::AnsiValue(42),  // SpringGreen2
                 older: Color::AnsiValue(36),    // DarkCyan

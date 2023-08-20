@@ -51,7 +51,35 @@ impl Date {
             match &flags.date {
                 DateFlag::Date => val.format("%c").to_string(),
                 DateFlag::Locale => val.format_localized("%c", locale).to_string(),
-                DateFlag::Relative => HumanTime::from(*val - Local::now()).to_string(),
+                DateFlag::Relative => {
+                    let mut s = HumanTime::from(*val - Local::now()).to_string();
+                    if s.ends_with(" ago") {
+                        s.truncate(s.len() - 4);
+                    }
+                    // truncate seconds to sec
+                    s = s.replace("seconds", "sec");
+                    // truncate minutes to min
+                    s = s.replace("minutes", "min");
+                    // truncate days to day
+                    s = s.replace("days", "day");
+                    // truncate months to mon
+                    s = s.replace("months", "mon");
+                    // truncate years to year
+                    s = s.replace("years", "year");
+
+                    // align single digits or chars
+                    if s.starts_with(|c: char| c.is_digit(10) || c.is_alphabetic())
+                        && !s
+                            .chars()
+                            .nth(1)
+                            .map_or(false, |c| c.is_digit(10) || c.is_alphabetic())
+                    {
+                        s.insert(0, ' ');
+                    }
+
+
+                    return s;
+                },
                 DateFlag::Iso => {
                     // 365.2425 * 24 * 60 * 60 = 31556952 seconds per year
                     // 15778476 seconds are 6 months

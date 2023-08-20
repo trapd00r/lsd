@@ -64,7 +64,7 @@ impl Permissions {
             if bit {
                 colors.colorize(chr, elem)
             } else {
-                colors.colorize('-', &Elem::NoAccess)
+                colors.colorize(' ', &Elem::NoAccess)
             }
         };
 
@@ -74,7 +74,7 @@ impl Permissions {
                 bit(self.user_read, "r", &Elem::Read),
                 bit(self.user_write, "w", &Elem::Write),
                 match (self.user_execute, self.setuid) {
-                    (false, false) => colors.colorize('-', &Elem::NoAccess),
+                    (false, false) => colors.colorize(' ', &Elem::NoAccess),
                     (true, false) => colors.colorize('x', &Elem::Exec),
                     (false, true) => colors.colorize('S', &Elem::ExecSticky),
                     (true, true) => colors.colorize('s', &Elem::ExecSticky),
@@ -83,7 +83,7 @@ impl Permissions {
                 bit(self.group_read, "r", &Elem::Read),
                 bit(self.group_write, "w", &Elem::Write),
                 match (self.group_execute, self.setgid) {
-                    (false, false) => colors.colorize('-', &Elem::NoAccess),
+                    (false, false) => colors.colorize(' ', &Elem::NoAccess),
                     (true, false) => colors.colorize('x', &Elem::Exec),
                     (false, true) => colors.colorize('S', &Elem::ExecSticky),
                     (true, true) => colors.colorize('s', &Elem::ExecSticky),
@@ -92,7 +92,7 @@ impl Permissions {
                 bit(self.other_read, "r", &Elem::Read),
                 bit(self.other_write, "w", &Elem::Write),
                 match (self.other_execute, self.sticky) {
-                    (false, false) => colors.colorize('-', &Elem::NoAccess),
+                    (false, false) => colors.colorize(' ', &Elem::NoAccess),
                     (true, false) => colors.colorize('x', &Elem::Exec),
                     (false, true) => colors.colorize('T', &Elem::ExecSticky),
                     (true, true) => colors.colorize('t', &Elem::ExecSticky),

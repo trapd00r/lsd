@@ -36,9 +36,9 @@ impl Date {
         let now = Local::now();
         let elem = match self {
             &Date::Date(modified) if modified > now - Duration::hours(2) => Elem::HourOld,
-            &Date::Date(modified) if modified > now - Duration::hours(6) => Elem::HoursOld,
+            &Date::Date(modified) if modified > now - Duration::hours(23) => Elem::HoursOld,
             &Date::Date(modified) if modified > now - Duration::days(1) => Elem::DayOld,
-            &Date::Date(modified) if modified > now - Duration::days(2) => Elem::DaysOld,
+            &Date::Date(modified) if modified > now - Duration::days(6) => Elem::DaysOld,
             &Date::Date(_) | Date::Invalid => Elem::Older,
         };
         colors.colorize(self.date_string(flags), &elem)

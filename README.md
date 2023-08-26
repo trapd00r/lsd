@@ -1,3 +1,23 @@
+# A fork of lsd that makes it more like ls++
+
+- Truncate and align relative times
+- Remove some delimiters
+- Add support for days_old and hours_old for relative times
+
+```yaml
+date:
+  # 23 hours max
+  hours-old: 208
+  # 2 hours max
+  hour-old: 196
+  # 6 days max
+  days-old: 240
+  # 2 days max
+  day-old: 244
+  older: 238
+```
+
+
 # LSD (LSDeluxe)
 
 [![license](http://img.shields.io/badge/license-Apache%20v2-blue.svg)](https://raw.githubusercontent.com/Peltoche/lsd/master/LICENSE)

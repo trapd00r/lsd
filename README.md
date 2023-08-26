@@ -17,6 +17,8 @@ date:
   older: 238
 ```
 
+![image](http://i.japh.se/lsd_relative_time.png)
+
 
 # LSD (LSDeluxe)
 

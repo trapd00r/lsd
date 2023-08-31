@@ -67,6 +67,8 @@ impl Date {
                     // truncate years to year
                     s = s.replace("years", "year");
 
+                    s = s.replace("now", " now");
+
                     // align single digits or chars
                     if s.starts_with(|c: char| c.is_digit(10) || c.is_alphabetic())
                         && !s
